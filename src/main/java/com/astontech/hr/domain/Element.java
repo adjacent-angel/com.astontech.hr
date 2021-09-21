@@ -8,7 +8,7 @@ public class Element {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ElementId")
-    private Integer id;
+    private Integer elementId;
 
     @Version
     private Integer version;
@@ -16,16 +16,17 @@ public class Element {
     private String elementName;
 
     public Element() {}
+
     public Element(String elementName) {
         this.elementName = elementName;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getElementId() {
+        return elementId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setElementId(Integer elementId) {
+        this.elementId = elementId;
     }
 
     public Integer getVersion() {

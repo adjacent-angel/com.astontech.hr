@@ -11,4 +11,15 @@ public interface ElementRepository extends CrudRepository<Element, Integer> {
     Element findByElementName(String elementName);
 
     List<Element> findAllByElementName(String elementName);
+
+    Element findByElementId(Integer id);
+
+    List<Element> findAllByElementId(Integer elementId);
+
+    Element findByElementIdOrElementNameIgnoreCase(Integer elementId, String elementName);
+
+    List<Element> findAllByElementNameIgnoreCase(String elementName);
+
+    List<Element> findAllByElementNameStartingWith(String elementName);
+
 }

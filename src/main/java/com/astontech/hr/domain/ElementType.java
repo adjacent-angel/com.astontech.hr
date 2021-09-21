@@ -9,7 +9,7 @@ public class ElementType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ElementTypeId")
-    private Integer id;
+    private Integer elementTypeId;
 
     @Version
     private Integer version;
@@ -28,12 +28,12 @@ public class ElementType {
         this.elementList = elementList;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getElementTypeId() {
+        return elementTypeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setElementTypeId(Integer elementTypeId) {
+        this.elementTypeId = elementTypeId;
     }
 
     public Integer getVersion() {
