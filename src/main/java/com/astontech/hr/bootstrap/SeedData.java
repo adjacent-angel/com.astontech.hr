@@ -1,6 +1,5 @@
 package com.astontech.hr.bootstrap;
 
-
 import com.astontech.hr.domain.Element;
 import com.astontech.hr.domain.ElementType;
 import com.astontech.hr.services.ElementService;
@@ -42,6 +41,8 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
 
         elementTypeService.saveElementType(laptopType);
 
+        // ========================================================
+
         ElementType cellphoneType = new ElementType("CellPhone");
 
         List<Element> elementList2 = new ArrayList<>();
@@ -55,6 +56,8 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
 
         elementTypeService.saveElementType(cellphoneType);
 
+        // ========================================================
+
         ElementType vehicleType = new ElementType("Vehicle");
 
         List<Element> elementList3 = new ArrayList<>();
@@ -67,6 +70,19 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
         vehicleType.setElementList(elementList3);
 
         elementTypeService.saveElementType(vehicleType);
+
+        // ========================================================
+
+        ElementType emailType = new ElementType("Email");
+
+        List<Element> emailList = new ArrayList<>();
+        emailList.add(new Element("Work"));
+        emailList.add(new Element("Personal"));
+        emailList.add(new Element("Delegated"));
+
+        emailType.setElementList(emailList);
+
+        elementTypeService.saveElementType(emailType);
 
 
 
