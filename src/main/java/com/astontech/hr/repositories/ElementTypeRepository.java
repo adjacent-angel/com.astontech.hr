@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface ElementTypeRepository extends CrudRepository<ElementType, Integer> {
 
-    ElementType findByElementType(String elementType);
+    ElementType findByElementTypeName(String elementTypeName);
 
-    List<ElementType> findAllByElementType(String elementType);
+    List<ElementType> findAllByElementTypeName(String elementTypeName);
 
     ElementType findByElementTypeId(Integer id);
 

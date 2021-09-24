@@ -37,10 +37,10 @@ public class ElementTypeServiceTest {
         assertEquals(elementType.getElementTypeId(), fetchedElementType.getElementTypeId());
 
         // update
-        fetchedElementType.setElementType("Test");
+        fetchedElementType.setElementTypeName("Test");
         elementTypeService.saveElementType(fetchedElementType);
 
         ElementType updatedElementType = elementTypeService.getElementTypeById(fetchedElementType.getElementTypeId());
-        assertEquals(updatedElementType.getElementType(), "Test");
+        assertEquals(updatedElementType.getElementTypeName(), "Test");
     }
 }

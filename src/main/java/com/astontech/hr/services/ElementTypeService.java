@@ -13,4 +13,6 @@ public interface ElementTypeService {
     Iterable<ElementType> saveElementTypeList(Iterable<ElementType> elementTypeIterable);
 
     void deleteElementType(Integer elementTypeId);
+
+    ElementType findByElementTypeName(String elementTypeName);
 }

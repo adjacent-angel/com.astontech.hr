@@ -36,4 +36,9 @@ public class ElementTypeServiceImpl implements ElementTypeService {
     public void deleteElementType(Integer id) {
         elementTypeRepository.deleteById(id);
     }
+
+    @Override
+    public ElementType findByElementTypeName(String elementTypeName) {
+        return elementTypeRepository.findByElementTypeName(elementTypeName);
+    }
 }
