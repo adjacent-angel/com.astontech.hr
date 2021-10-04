@@ -64,7 +64,6 @@ public class VehicleController {
         model.addAttribute("vehicleMakeList", vehicleMakeService.listAllVehicleMake());
         model.addAttribute("vehicleModelList", vehicleModelService.listAllVehicleModel());
 
-
         return "admin/vehicle_management/vehicle_list";
     }
 
@@ -165,6 +164,7 @@ public class VehicleController {
     private void saveVehicleTypeAndVehicleFromVO(VehicleVO vehicleVO) {
 
         VehicleType newVehicleType;
+
         if (vehicleTypeService.getVehicleTypeByName(vehicleVO.getNewVehicleTypeName()) == null) {
             newVehicleType = new VehicleType(vehicleVO.getNewVehicleTypeName());
             vehicleTypeService.saveVehicleType(newVehicleType);
@@ -172,6 +172,21 @@ public class VehicleController {
             newVehicleType = vehicleTypeService.getVehicleTypeByName(vehicleVO.getNewVehicleTypeName());
         }
 
+//        VehicleMake newVehicleMake;
+//        if (vehicleMakeService.getVehicleMakeByName(vehicleVO.getNewVehicleMakeName()) == null) {
+//            newVehicleMake = new VehicleMake(vehicleVO.getNewVehicleMakeName());
+//            vehicleMakeService.saveVehicleMake(newVehicleMake);
+//        } else {
+//            newVehicleMake = vehicleMakeService.getVehicleMakeByName(vehicleVO.getNewVehicleMakeName());
+//        }
+//
+//        VehicleModel newVehicleModel;
+//        if (vehicleModelService.getVehicleModelByName(vehicleVO.getNewVehicleModelName()) == null) {
+//            newVehicleModel = new VehicleModel(vehicleVO.getNewVehicleModelName());
+//            vehicleModelService.saveVehicleModel(newVehicleModel);
+//        } else {
+//            newVehicleModel = vehicleModelService.getVehicleModelByName(vehicleVO.getNewVehicleModelName());
+//        }
         VehicleMake newVehicleMake = new VehicleMake(vehicleVO.getNewVehicleMakeName());
         newVehicleMake.setVehicleType(newVehicleType);
         vehicleMakeService.saveVehicleMake(newVehicleMake);
