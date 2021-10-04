@@ -29,6 +29,7 @@ public class ElementType {
     public ElementType (String elementTypeName) {
         this.setElementTypeName(elementTypeName);
     }
+
     public ElementType(String elementTypeName, List<Element> elementList) {
         this.setElementTypeName(elementTypeName);
         this.setElementList(elementList);

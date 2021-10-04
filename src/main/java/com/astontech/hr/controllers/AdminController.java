@@ -35,6 +35,7 @@ public class AdminController {
     @RequestMapping(value = "/admin/element/add", method = RequestMethod.GET)
     public String adminElementGet(Model model) {
         model.addAttribute("elementVO", new ElementVO());
+        model.addAttribute("warningAlert", "visible");
         return "admin/element_management/element_add";
     }
 
@@ -44,6 +45,12 @@ public class AdminController {
         logElementVO(elementVO);
         saveElementTypeAndElementsFromVO(elementVO);
 
+        boolean success = true;
+        if(success)
+            model.addAttribute("successAlert", "visible");
+        else
+            model.addAttribute("errorAlert", "visible");
+        model.addAttribute("elementVO", new ElementVO());
         return "admin/element_management/element_add";
     }
 
@@ -71,7 +78,13 @@ public class AdminController {
     public String elementTypeUpdate(ElementType elementType, Model model, @RequestParam("inputNewElement") String newElement) {
         // if new element (unbound text box) has a value, add it to the list
         if(!newElement.equals("")) {
-            elementType.getElementList().add(new Element(newElement));
+            if(elementType.getElementList() == null) {
+                List<Element> elementList = new ArrayList<Element>();
+                elementList.add(new Element(newElement));
+                elementType.setElementList(elementList);
+            } else {
+                elementType.getElementList().add(new Element(newElement));
+            }
         }
 
         //iterate through list of elements

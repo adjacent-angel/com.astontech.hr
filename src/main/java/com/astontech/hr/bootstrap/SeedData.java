@@ -1,15 +1,17 @@
 package com.astontech.hr.bootstrap;
 
-import com.astontech.hr.domain.Element;
-import com.astontech.hr.domain.ElementType;
+import com.astontech.hr.domain.*;
 import com.astontech.hr.services.ElementService;
 import com.astontech.hr.services.ElementTypeService;
+import com.astontech.hr.services.VehicleTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -20,6 +22,9 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private ElementTypeService elementTypeService;
+
+    @Autowired
+    private VehicleTypeService vehicleTypeService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -58,21 +63,6 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
 
         // ========================================================
 
-        ElementType vehicleType = new ElementType("Vehicle");
-
-        List<Element> elementList3 = new ArrayList<>();
-        elementList3.add(new Element("Tesla"));
-        elementList3.add(new Element("Nissan"));
-        elementList3.add(new Element("Ford"));
-        elementList3.add(new Element("Toyota"));
-        elementList3.add(new Element("Dodge"));
-
-        vehicleType.setElementList(elementList3);
-
-        elementTypeService.saveElementType(vehicleType);
-
-        // ========================================================
-
         ElementType emailType = new ElementType("Email");
 
         List<Element> emailList = new ArrayList<>();
@@ -84,9 +74,24 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
 
         elementTypeService.saveElementType(emailType);
 
+        // ========================================================
 
+        List<VehicleModel> vehicleModelList = new ArrayList<>();
+        vehicleModelList.add(new VehicleModel("Ace"));
+        vehicleModelList.add(new VehicleModel("Spades"));
+        vehicleModelList.add(new VehicleModel("Clubs"));
+
+        VehicleType randomType = new VehicleType("VehicleTestFill");
+
+        List<VehicleMake> vehicleMakeList = new ArrayList<>();
+        vehicleMakeList.add(new VehicleMake("one", vehicleModelList));
+        vehicleMakeList.add(new VehicleMake("two", vehicleModelList));
+        vehicleMakeList.add(new VehicleMake("three", vehicleModelList));
+
+//        randomType.set(vehicleMakeList);
+
+        vehicleTypeService.saveVehicleType(randomType);
 
     }
-
 
 }

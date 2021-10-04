@@ -24,8 +24,8 @@
     <%--SIDEBAR HERE--%>
     <%@include file="element_sidebar.jsp"%>
 
-    <div id="main-wrapper" class="col-md-11 pull-right">
-        <div class="col-lg-8 col-md-7 col-sm-6">
+    <div id="main-wrapper" class="col-sm-10">
+        <div class="col-sm-8">
 
             <c:set var="idx" value="0" scope="page" />
             <form:form class="form-horizontal" modelAttribute="elementType" action="/admin/element/update" method="post">
@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="form-group">
                         <label for="inputElementTypeName" class="col-sm-2 control-label">Element Type</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <form:input path="elementTypeName" type="text" id="inputElementTypeName" cssClass="form-control"></form:input>
                         </div>
                     </div>
@@ -80,8 +80,11 @@
                 </div>
             </form:form>
         </div>
-    </div>
+        <div class="col-sm-4">
+            <%--ALERTS--%>
 
+        </div>
+    </div>
 </div>
 
 <%@include file="../../includes/footer.jsp"%>

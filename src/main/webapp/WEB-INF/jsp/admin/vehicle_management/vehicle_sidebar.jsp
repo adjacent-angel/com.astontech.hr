@@ -2,10 +2,10 @@
     <div id="sidebar">
         <ul class="nav list-group">
             <li>
-                <a class="list-group-item" href="/admin/element/add">New</a>
+                <a class="list-group-item" href="/admin/vehicle/list">Vehicle Management List</a>
             </li>
             <li>
-                <a class="list-group-item" href="/admin/element/list">List All</a>
+                <a class="list-group-item" href="/admin/vehicle/add">Add New Vehicle</a>
             </li>
         </ul>
     </div>
