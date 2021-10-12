@@ -1,9 +1,7 @@
 package com.astontech.hr.bootstrap;
 
 import com.astontech.hr.domain.*;
-import com.astontech.hr.services.ElementService;
-import com.astontech.hr.services.ElementTypeService;
-import com.astontech.hr.services.VehicleTypeService;
+import com.astontech.hr.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -24,7 +22,10 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
     private ElementTypeService elementTypeService;
 
     @Autowired
-    private VehicleTypeService vehicleTypeService;
+    private VehicleMakeService vehicleMakeService;
+
+    @Autowired
+    private VehicleModelService vehicleModelService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -76,22 +77,15 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
 
         // ========================================================
 
-        List<VehicleModel> vehicleModelList = new ArrayList<>();
-        vehicleModelList.add(new VehicleModel("Ace"));
-        vehicleModelList.add(new VehicleModel("Spades"));
-        vehicleModelList.add(new VehicleModel("Clubs"));
+        VehicleMake testMake = new VehicleMake("Test");
 
-        VehicleType randomType = new VehicleType("VehicleTestFill");
+        List<VehicleModel> testModelList = new ArrayList<>();
+        testModelList.add(new VehicleModel("test model 1"));
+        testModelList.add(new VehicleModel("test model 2"));
+        testModelList.add(new VehicleModel("test model 3"));
 
-        List<VehicleMake> vehicleMakeList = new ArrayList<>();
-        vehicleMakeList.add(new VehicleMake("one", vehicleModelList));
-        vehicleMakeList.add(new VehicleMake("two", vehicleModelList));
-        vehicleMakeList.add(new VehicleMake("three", vehicleModelList));
+        testMake.setVehicleModelList(testModelList);
 
-//        randomType.set(vehicleMakeList);
-
-        vehicleTypeService.saveVehicleType(randomType);
-
+        vehicleMakeService.saveVehicleMake(testMake);
     }
-
 }

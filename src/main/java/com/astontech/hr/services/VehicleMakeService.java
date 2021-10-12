@@ -1,6 +1,9 @@
 package com.astontech.hr.services;
 
 import com.astontech.hr.domain.VehicleMake;
+import com.astontech.hr.domain.VehicleModel;
+
+import java.util.List;
 
 public interface VehicleMakeService {
 
@@ -8,13 +11,12 @@ public interface VehicleMakeService {
 
     VehicleMake getVehicleMakeById(Integer vehicleMakeId);
 
-    VehicleMake getVehicleMakeByName (String vehicleMakeName);
-
     VehicleMake saveVehicleMake(VehicleMake vehicleMake);
 
     Iterable<VehicleMake> saveVehicleMakeList(Iterable<VehicleMake> vehicleMakeIterable);
 
     void deleteVehicleMake(Integer vehicleMakeId);
 
-    VehicleMake findByVehicleMakeName(String vehicleMakeName);
+    void deleteModelFromMake(VehicleModel vehicleModel);
+
 }

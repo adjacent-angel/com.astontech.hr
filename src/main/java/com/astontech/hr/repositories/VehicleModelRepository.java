@@ -9,9 +9,4 @@ public interface VehicleModelRepository extends CrudRepository<VehicleModel, Int
 
     VehicleModel findByVehicleModelName(String vehicleModelName);
 
-    List<VehicleModel> findAllByVehicleModelName(String vehicleModelName);
-
-    VehicleModel findByVehicleModelId(Integer vehicleModelId);
-
-    List<VehicleModel> findAllByVehicleModelId(Integer vehicleModelId);
 }

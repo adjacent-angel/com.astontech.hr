@@ -14,20 +14,24 @@ public class VehicleType {
     @Version
     private Integer version;
 
-    private String vehicleTypeName;
+    private int vehicleYear;
+    private String vehiclePlate;
+    private String vehicleColor;
 
-
+    //region CONSTRUCTORS
 
     public VehicleType() {
     }
 
-    public VehicleType(Integer vehicleTypeId) {
-        this.setVehicleTypeId(vehicleTypeId);
+    public VehicleType(int vehicleYear, String vehiclePlate) {
+        this.setVehicleYear(vehicleYear);
+        this.setVehiclePlate(vehiclePlate);
     }
 
-    public VehicleType(String vehicleTypeName) {
-        this.setVehicleTypeName(vehicleTypeName);
-    }
+
+    //endregion
+
+    //region GET/SET
 
 
     public Integer getVehicleTypeId() {
@@ -46,21 +50,46 @@ public class VehicleType {
         this.version = version;
     }
 
-    public String getVehicleTypeName() {
-        return vehicleTypeName;
+    public int getVehicleYear() {
+        return vehicleYear;
     }
 
-    public void setVehicleTypeName(String vehicleTypeName) {
-        this.vehicleTypeName = vehicleTypeName;
+    public void setVehicleYear(int vehicleYear) {
+        this.vehicleYear = vehicleYear;
     }
+
+    public String getVehiclePlate() {
+        return vehiclePlate;
+    }
+
+    public void setVehiclePlate(String vehiclePlate) {
+        this.vehiclePlate = vehiclePlate;
+    }
+
+    public String getVehicleColor() {
+        return vehicleColor;
+    }
+
+    public void setVehicleColor(String vehicleColor) {
+        this.vehicleColor = vehicleColor;
+    }
+
+//endregion
+
+    //region CUSTOM
 
     @Override
     public String toString() {
         return "VehicleType{" +
                 "vehicleTypeId=" + vehicleTypeId +
                 ", version=" + version +
-                ", vehicleTypeName='" + vehicleTypeName + '\'' +
+                ", vehicleYear=" + vehicleYear +
+                ", vehiclePlate='" + vehiclePlate + '\'' +
+                ", vehicleColor='" + vehicleColor + '\'' +
                 '}';
     }
+
+
+    //endregion
 
 }

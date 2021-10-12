@@ -12,40 +12,44 @@
             <legend>Vehicle Management List</legend>
             <table class="table table-striped table-hover">
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Vehicle Type</th>
-                    <th>Vehicle Make</th>
-                    <th>Vehicle Model</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Vehicle Type</th>
+                        <th>Vehicle Make</th>
+                        <th>Vehicle Model</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
                 </thead>
                 <tbody>
-
-                <c:forEach var="vt" items="${vehicleTypeList}">
-                    <tr>
-                        <td>${vt.vehicleTypeId}</td>
-                        <td>${vt.vehicleTypeName}</td>
-                        <td>
-                            <c:forEach var="vm" items="${vehicleMakeList}">
-                                <c:if test="${vm.vehicleType.vehicleTypeName == vt.vehicleTypeName}">
-                                    ${vm.vehicleMakeName}
-                                </c:if>
-                            </c:forEach>
-                        </td>
-                        <td>
-                            <c:forEach var="vmo" items="${vehicleModelList}">
-                                <c:if test="${vmo.vehicleMake.vehicleType.vehicleTypeName == vt.vehicleTypeName}">
-                                    ${vmo.vehicleModelName}
-                                </c:if>
-                            </c:forEach>
-                        </td>
-                        <td><a href="/admin/vehicle/edit/">Edit</a></td>
-                        <td><a href="/admin/vehicle/delete/${vt.vehicleTypeId}">Delete</a></td>
-                    </tr>
-                </c:forEach>
-
+                    <c:forEach var="vm" items="${vehicleMakeList}">
+                        <tr>
+                            <td>${vm.vehicleMakeId}</td>
+                            <td>${vm.vehicleMakeName}</td>
+                            <td> models here </td>
+                            <td> types here </td>
+<%--                            <td>--%>
+<%--                                <c:forEach var="vml" items="${vehicleMakeList}">--%>
+<%--                                    <ul style="list-style: none">--%>
+<%--                                    <c:if test="${vm.vehicleType.vehicleTypeName == vt.vehicleTypeName}">--%>
+<%--                                        <li>${vm.vehicleMakeName}</li>--%>
+<%--                                    </c:if>--%>
+<%--                                    </ul>--%>
+<%--                                </c:forEach>--%>
+<%--                            </td>--%>
+<%--                            <td>--%>
+<%--                                <c:forEach var="vmo" items="${vehicleModelList}">--%>
+<%--                                    <ul style="list-style: none">--%>
+<%--                                    <c:if test="${vmo.vehicleMake.vehicleType.vehicleTypeName == vt.vehicleTypeName}">--%>
+<%--                                        <li>${vmo.vehicleModelName}</li>--%>
+<%--                                    </c:if>--%>
+<%--                                    </ul>--%>
+<%--                                </c:forEach>--%>
+<%--                            </td>--%>
+                            <td><a href="/admin/vehicle/edit/${vm.vehicleMakeId}">Edit</a></td>
+                            <td><a href="/admin/vehicle/delete/${vm.vehicleMakeId}">Delete Row</a></td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>

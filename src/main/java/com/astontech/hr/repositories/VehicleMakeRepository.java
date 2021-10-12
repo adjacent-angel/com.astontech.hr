@@ -9,9 +9,4 @@ public interface VehicleMakeRepository extends CrudRepository<VehicleMake, Integ
 
     VehicleMake findByVehicleMakeName(String vehicleMakeName);
 
-    List<VehicleMake> findAllByVehicleMakeName(String vehicleMakeName);
-
-    VehicleMake findByVehicleMakeId(Integer vehicleMakeId);
-
-    List<VehicleMake> findAllByVehicleMakeId(Integer vehicleMakeId);
 }

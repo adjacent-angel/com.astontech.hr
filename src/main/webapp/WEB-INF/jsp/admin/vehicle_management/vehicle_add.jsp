@@ -40,6 +40,7 @@
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                             <form:button type="reset" value="cancel" class="btn btn-default">Cancel</form:button>
+                            <form:button disabled="true" class="btn btn-default"></form:button>
                             <form:button type="submit" value="save" class="btn btn-primary">Save</form:button>
                         </div>
                     </div>

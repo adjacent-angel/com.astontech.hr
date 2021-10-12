@@ -1,10 +1,13 @@
 package com.astontech.hr.services.impl;
 
 import com.astontech.hr.domain.VehicleModel;
+import com.astontech.hr.domain.VehicleType;
 import com.astontech.hr.repositories.VehicleModelRepository;
 import com.astontech.hr.services.VehicleModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class VehicleModelServiceImpl implements VehicleModelService {
@@ -19,7 +22,7 @@ public class VehicleModelServiceImpl implements VehicleModelService {
 
     @Override
     public VehicleModel getVehicleModelById(Integer vehicleModelId) {
-        return vehicleModelRepository.findByVehicleModelId(vehicleModelId);
+        return vehicleModelRepository.findById(vehicleModelId).orElse(null);
     }
 
     @Override
@@ -38,12 +41,8 @@ public class VehicleModelServiceImpl implements VehicleModelService {
     }
 
     @Override
-    public VehicleModel findByVehicleModelName(String vehicleModelName) {
-        return vehicleModelRepository.findByVehicleModelName(vehicleModelName);
+    public void deleteTypeFromModel(VehicleType vehicleType) {
+        vehicleModelRepository.deleteById(vehicleType.getVehicleTypeId());
     }
 
-    @Override
-    public VehicleModel getVehicleModelByName(String vehicleModelName) {
-        return vehicleModelRepository.findByVehicleModelName(vehicleModelName);
-    }
 }

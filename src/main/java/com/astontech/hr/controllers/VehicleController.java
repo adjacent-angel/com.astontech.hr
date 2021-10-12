@@ -3,10 +3,8 @@ package com.astontech.hr.controllers;
 import com.astontech.hr.domain.VO.VehicleVO;
 import com.astontech.hr.domain.VehicleMake;
 import com.astontech.hr.domain.VehicleModel;
-import com.astontech.hr.domain.VehicleType;
 import com.astontech.hr.services.VehicleMakeService;
 import com.astontech.hr.services.VehicleModelService;
-import com.astontech.hr.services.VehicleTypeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -26,199 +23,105 @@ import java.util.List;
 public class VehicleController {
 
     @Autowired
-    private VehicleTypeService vehicleTypeService;
-
-    @Autowired
     private VehicleMakeService vehicleMakeService;
 
     @Autowired
     private VehicleModelService vehicleModelService;
 
-
     private Logger log = LogManager.getLogger(VehicleController.class);
 
 
-    @RequestMapping(value = "admin/vehicle/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/vehicle/add", method = RequestMethod.GET)
     public String adminVehicleGet(Model model) {
         model.addAttribute("vehicleVO", new VehicleVO());
-
+        model.addAttribute("warningAlert", "visible");
         return "admin/vehicle_management/vehicle_add";
     }
 
-    @RequestMapping(value = "/admin/vehicle/add", method = RequestMethod.POST)
+    @RequestMapping(value ="/admin/vehicle/add", method = RequestMethod.POST)
     public String adminVehiclePost(VehicleVO vehicleVO, Model model) {
-        saveVehicleTypeAndVehicleFromVO(vehicleVO);
+        vehicleVO.getNewVehicleModelArray();
+        logVehicleVO(vehicleVO);
+        saveVehicleMakeTypeFromVO(vehicleVO);
+
         boolean success = true;
         if(success)
-            model.addAttribute("successAlert", "visible");
+            model.addAttribute("succussAlert", "visible");
         else
             model.addAttribute("errorAlert", "visible");
         model.addAttribute("vehicleVO", new VehicleVO());
-
-        return "admin/vehicle_management/vehicle_add";
+        return "admin/vehicle_management/vehicle_list";
     }
 
     @RequestMapping(value = "/admin/vehicle/list", method = RequestMethod.GET)
     public String adminVehicleList(Model model) {
-        model.addAttribute("vehicleTypeList", vehicleTypeService.listAllVehicleType());
         model.addAttribute("vehicleMakeList", vehicleMakeService.listAllVehicleMake());
-        model.addAttribute("vehicleModelList", vehicleModelService.listAllVehicleModel());
-
         return "admin/vehicle_management/vehicle_list";
     }
 
-    @RequestMapping(value="/admin/vehicle/edit", method = RequestMethod.GET)
-    public String adminVehicleEditList(Model model) {
-        model.addAttribute("vehicleTypeList", vehicleTypeService.listAllVehicleType());
-        model.addAttribute("vehicleMakeList", vehicleMakeService.listAllVehicleMake());
-        model.addAttribute("vehicleModelList", vehicleModelService.listAllVehicleModel());
+    @RequestMapping(value = "/admin/vehicle/edit/{vehicleMakeId}", method = RequestMethod.GET)
+    public String vehicleMakeEdit(@PathVariable int vehicleMakeId, Model model) {
+        VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(vehicleMakeId);
 
+        model.addAttribute("vehicleMake", vehicleMake);
         return "admin/vehicle_management/vehicle_edit";
     }
 
-    @RequestMapping(value = "/admin/vehicle/type/edit", method = RequestMethod.GET)
-    public String vehicleTypeEdit( Model model) {
-        model.addAttribute("vehicleTypeList", vehicleTypeService.listAllVehicleType());
-
-        return "admin/vehicle_management/vehicle_type_edit";
-    }
-
-    @RequestMapping(value = "/admin/vehicle/make/edit", method = RequestMethod.GET)
-    public String vehicleMakeEdit(Model model) {
-        model.addAttribute("vehicleMakeList", vehicleMakeService.listAllVehicleMake());
-
-        return "admin/vehicle_management/vehicle_edit";
-    }
-
-    @RequestMapping(value = "admin/vehicle/model/edit", method = RequestMethod.GET)
-    public String vehicleModelEdit(Model model) {
-        model.addAttribute("vehicleModelList", vehicleModelService.listAllVehicleModel());
-
-        return "admin/vehicle_management/vehicle_edit";
-    }
-
-    @RequestMapping(value = "/admin/vehicle/delete/{vehicleTypeId}", method = RequestMethod.GET)
-    public String vehicleTypeDelete(@PathVariable int vehicleTypeId) {
-        vehicleTypeService.deleteVehicleType(vehicleTypeId);
+    @RequestMapping(value = "/admin/vehicle/delete/{vehicleMakeId}", method = RequestMethod.GET)
+    public String vehicleMakeDelete(@PathVariable int vehicleMakeId) {
+        vehicleMakeService.deleteVehicleMake(vehicleMakeId);
         return "redirect:/admin/vehicle/list";
     }
 
     @RequestMapping(value = "/admin/vehicle/update", method = RequestMethod.POST)
-    public String vehicleTypeUpdate(VehicleType vehicleType, VehicleMake vehicleMake, VehicleModel vehicleModel, Model model, @RequestParam("inputNewVehicleType") String newVehicleType ,@RequestParam("inputNewVehicleMake") String newVehicleMake, @RequestParam("inputNewVehicleModel") String newVehicleModel) {
-        if (!newVehicleModel.equals("")) {
-            if (vehicleModelService.listAllVehicleModel() == null) {
+    public String vehicleMakeUpdate(VehicleMake vehicleMake, Model model, @RequestParam("inputNewVehicleModel") String newVehicleModel) {
+        if(!newVehicleModel.equals("")) {
+            if(vehicleMake.getVehicleModelList() == null) {
                 List<VehicleModel> vehicleModelList = new ArrayList<VehicleModel>();
                 vehicleModelList.add(new VehicleModel(newVehicleModel));
-                vehicleModelService.saveVehicleModelList(vehicleModelList);
+                vehicleMake.setVehicleModelList(vehicleModelList);
             } else {
-                vehicleModel = vehicleModelService.getVehicleModelById(vehicleModel.getVehicleModelId());
+                vehicleMake.getVehicleModelList().add(new VehicleModel(newVehicleModel));
             }
         }
 
-        for (VehicleModel vehicleModel1 : vehicleModelService.listAllVehicleModel()) {
-            if (vehicleModel1.getVehicleModelName().equals("")) {
-                vehicleModelService.deleteVehicleModel(vehicleModel1.getVehicleModelId());
+        for (int i = 0; i < vehicleMake.getVehicleModelList().size(); i++) {
+            if(vehicleMake.getVehicleModelList().get(i).getVehicleModelName().equals("")) {
+                vehicleMake.getVehicleModelList().remove(i);
             }
         }
 
-            if (!newVehicleMake.equals("")) {
-                if (vehicleMakeService.listAllVehicleMake() == null) {
-                    List<VehicleMake> vehicleMakeList = new ArrayList<VehicleMake>();
-                    vehicleMakeList.add(new VehicleMake(newVehicleMake));
-                    vehicleMakeService.saveVehicleMakeList(vehicleMakeList);
-                } else {
-                    vehicleMake = vehicleMakeService.getVehicleMakeById(vehicleMake.getVehicleMakeId());
-                }
-            }
-
-            for (VehicleMake vehicleMake1 : vehicleMakeService.listAllVehicleMake()) {
-                if (vehicleMake1.getVehicleMakeName().equals("")) {
-                    vehicleMakeService.deleteVehicleMake(vehicleMake1.getVehicleMakeId());
-                }
-            }
-
-            if (!newVehicleType.equals("")) {
-                if (vehicleTypeService.listAllVehicleType() == null) {
-                    List<VehicleType> vehicleTypeList = new ArrayList<VehicleType>();
-                    vehicleTypeList.add(new VehicleType(newVehicleType));
-                    vehicleTypeService.saveVehicleTypeList(vehicleTypeList);
-                } else {
-                    vehicleType = vehicleTypeService.getVehicleTypeById(vehicleType.getVehicleTypeId());
-                }
-            }
-
-            for (VehicleType vehicleType1 : vehicleTypeService.listAllVehicleType()) {
-                if (vehicleType1.getVehicleTypeName().equals("")) {
-                    vehicleTypeService.deleteVehicleType(vehicleType1.getVehicleTypeId());
-                }
-            }
-
-            vehicleTypeService.saveVehicleType(vehicleType);
-            vehicleMakeService.saveVehicleMake(vehicleMake);
-            vehicleModelService.saveVehicleModel(vehicleModel);
-
-            return "redirect:/admin/vehicle/edit/" + vehicleType.getVehicleTypeName();
-        }
-
-    // region HELPER METHODS
-    private void saveVehicleTypeAndVehicleFromVO(VehicleVO vehicleVO) {
-
-        VehicleType newVehicleType;
-
-        if (vehicleTypeService.getVehicleTypeByName(vehicleVO.getNewVehicleTypeName()) == null) {
-            newVehicleType = new VehicleType(vehicleVO.getNewVehicleTypeName());
-            vehicleTypeService.saveVehicleType(newVehicleType);
-        } else {
-            newVehicleType = vehicleTypeService.getVehicleTypeByName(vehicleVO.getNewVehicleTypeName());
-        }
-
-//        VehicleMake newVehicleMake;
-//        if (vehicleMakeService.getVehicleMakeByName(vehicleVO.getNewVehicleMakeName()) == null) {
-//            newVehicleMake = new VehicleMake(vehicleVO.getNewVehicleMakeName());
-//            vehicleMakeService.saveVehicleMake(newVehicleMake);
-//        } else {
-//            newVehicleMake = vehicleMakeService.getVehicleMakeByName(vehicleVO.getNewVehicleMakeName());
-//        }
-//
-//        VehicleModel newVehicleModel;
-//        if (vehicleModelService.getVehicleModelByName(vehicleVO.getNewVehicleModelName()) == null) {
-//            newVehicleModel = new VehicleModel(vehicleVO.getNewVehicleModelName());
-//            vehicleModelService.saveVehicleModel(newVehicleModel);
-//        } else {
-//            newVehicleModel = vehicleModelService.getVehicleModelByName(vehicleVO.getNewVehicleModelName());
-//        }
-        VehicleMake newVehicleMake = new VehicleMake(vehicleVO.getNewVehicleMakeName());
-        newVehicleMake.setVehicleType(newVehicleType);
-        vehicleMakeService.saveVehicleMake(newVehicleMake);
-
-        VehicleModel newVehicleModel = new VehicleModel(vehicleVO.getNewVehicleModelName());
-        newVehicleModel.setVehicleMake(newVehicleMake);
-        vehicleModelService.saveVehicleModel(newVehicleModel);
+        vehicleMakeService.saveVehicleMake(vehicleMake);
+        return "redirect:/admin/vehicle/edit/" + vehicleMake.getVehicleMakeId();
     }
 
-    // endregion
-//
-//    @RequestMapping(value="/admin/vehicle/type/update", method = RequestMethod.POST)
-//    public String vehicleTypeNameEdit(VehicleType vehicleType, Model model, @RequestParam("inputNewVehicleType") String newVehicleType) {
-////        model.addAttribute("vehicleTypeEditList", vehicleTypeService.listAllVehicleType());
-//        if (!newVehicleType.equals("")) {
-//            if (vehicleTypeService.listAllVehicleType() == null) {
-//                List<VehicleType> vehicleTypeList = new ArrayList<VehicleType>();
-//                vehicleTypeList.add(new VehicleType(newVehicleType));
-//                vehicleTypeService.saveVehicleTypeList(vehicleTypeList);
-//            } else {
-//                vehicleType = vehicleTypeService.getVehicleTypeById(vehicleType.getVehicleTypeId());
-//            }
-//        }
-//
-//        for (VehicleType vehicleType1 : vehicleTypeService.listAllVehicleType()) {
-//            if (vehicleType1.getVehicleTypeName().equals("")) {
-//                vehicleTypeService.deleteVehicleType(vehicleType1.getVehicleTypeId());
-//            }
-//        }
-//        vehicleTypeService.saveVehicleType(vehicleType);
-//
-//        return "admin/vehicle_management/vehicle_type_edit"  + vehicleType.getVehicleTypeName();
-//    }
 
+
+
+
+    // region HELPER METHODS
+
+    private void saveVehicleMakeTypeFromVO(VehicleVO vehicleVO) {
+        List<VehicleModel> newVehicleModelList = new ArrayList<>();
+        for(String str : vehicleVO.getNewVehicleModelArray()) {
+            newVehicleModelList.add(new VehicleModel(str));
+        }
+
+        VehicleMake newVehicleMake = new VehicleMake(vehicleVO.getNewVehicleMake());
+        newVehicleMake.setVehicleModelList(newVehicleModelList);
+
+        vehicleMakeService.saveVehicleMake(newVehicleMake);
+    }
+
+    private void logVehicleVO(VehicleVO vehicleVO) {
+        log.info("New Vehicle Make: " + vehicleVO.getNewVehicleMake());
+
+        for(String str : vehicleVO.getNewVehicleModelArray()) {
+            log.info("new Vehicle Model: " + str);
+        }
+    }
+
+
+
+    // endregion
 }

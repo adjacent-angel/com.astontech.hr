@@ -12,7 +12,6 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
     @Autowired
     private VehicleTypeRepository vehicleTypeRepository;
 
-
     @Override
     public Iterable<VehicleType> listAllVehicleType() {
         return vehicleTypeRepository.findAll();
@@ -34,20 +33,8 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
     }
 
     @Override
-    public VehicleType getVehicleTypeByName(String vehicleTypeName) {
-        return vehicleTypeRepository.findByVehicleTypeName(vehicleTypeName);
-    }
-
-    @Override
     public void deleteVehicleType(Integer vehicleTypeId) {
         vehicleTypeRepository.deleteById(vehicleTypeId);
+
     }
-
-    @Override
-    public VehicleType findByVehicleTypeName(String vehicleTypeName) {
-        return vehicleTypeRepository.findByVehicleTypeName(vehicleTypeName);
-    }
-
-
-
 }

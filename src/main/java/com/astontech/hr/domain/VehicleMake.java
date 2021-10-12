@@ -1,5 +1,8 @@
 package com.astontech.hr.domain;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,24 +19,19 @@ public class VehicleMake {
 
    private String vehicleMakeName;
 
+   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+   private List<VehicleModel> vehicleModelList;
 
-   @ManyToOne
-   private VehicleType vehicleType;
-
-
-
+    //region CONSTRUCTORS
     public VehicleMake() {}
 
-   public VehicleMake(Integer vehicleMakeId) {
-      this.setVehicleMakeId(vehicleMakeId);
-   }
-
     public VehicleMake(String vehicleMakeName) {
-       this.setVehicleMakeName(vehicleMakeName);
+        this.setVehicleMakeName(vehicleMakeName);
     }
 
-    public VehicleMake(String vehicleMakeName, List<VehicleModel> vehicleModelList) {
-    }
+    //endregion
+
+    //region GET/SET
 
     public Integer getVehicleMakeId() {
         return vehicleMakeId;
@@ -59,18 +57,17 @@ public class VehicleMake {
         this.vehicleMakeName = vehicleMakeName;
     }
 
-    public VehicleType getVehicleType() {
-        return vehicleType;
+    public List<VehicleModel> getVehicleModelList() {
+        return vehicleModelList;
     }
 
-    public void setVehicleType(VehicleType vehicleType) {
-        this.vehicleType = vehicleType;
+    public void setVehicleModelList(List<VehicleModel> vehicleModelList) {
+        this.vehicleModelList = vehicleModelList;
     }
 
-    public void add(VehicleMake vehicleMake) {
-    }
+    //endregion
 
-
+    //region CUSTOM
 
     @Override
     public String toString() {
@@ -78,7 +75,10 @@ public class VehicleMake {
                 "vehicleMakeId=" + vehicleMakeId +
                 ", version=" + version +
                 ", vehicleMakeName='" + vehicleMakeName + '\'' +
-                ", vehicleType=" + vehicleType +
+                ", vehicleModelList=" + vehicleModelList +
                 '}';
     }
+
+    //endregion
+
 }

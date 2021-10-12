@@ -6,12 +6,12 @@
     $(document).ready(function() {
         //attach onclick function to remove buttons
         $('.remove_button').click(function() {
-        //log name button and contents of associated text box
+            //log name button and contents of associated text box
             console.log(this.name);
             console.log($('#'+this.name).val());
-        //clear value of textbox
+            //clear value of textbox
             $('#'+this.name).val('');
-        //submit form
+            //submit form
             $('#elementType').submit();
         });
     });

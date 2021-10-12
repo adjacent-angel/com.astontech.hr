@@ -1,10 +1,13 @@
 package com.astontech.hr.services.impl;
 
 import com.astontech.hr.domain.VehicleMake;
+import com.astontech.hr.domain.VehicleModel;
 import com.astontech.hr.repositories.VehicleMakeRepository;
 import com.astontech.hr.services.VehicleMakeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class VehicleMakeServiceImpl implements VehicleMakeService {
@@ -19,7 +22,7 @@ public class VehicleMakeServiceImpl implements VehicleMakeService {
 
     @Override
     public VehicleMake getVehicleMakeById(Integer vehicleMakeId) {
-        return vehicleMakeRepository.findByVehicleMakeId(vehicleMakeId);
+        return vehicleMakeRepository.findById(vehicleMakeId).orElse(null);
     }
 
     @Override
@@ -38,13 +41,10 @@ public class VehicleMakeServiceImpl implements VehicleMakeService {
     }
 
     @Override
-    public VehicleMake findByVehicleMakeName(String vehicleMakeName) {
-        return vehicleMakeRepository.findByVehicleMakeName(vehicleMakeName);
+    public void deleteModelFromMake(VehicleModel vehicleModel) {
+        vehicleMakeRepository.deleteById(vehicleModel.getVehicleModelId());
+
     }
 
-    @Override
-    public VehicleMake getVehicleMakeByName(String vehicleMakeName) {
-        return vehicleMakeRepository.findByVehicleMakeName(vehicleMakeName);
-    }
 }
 
