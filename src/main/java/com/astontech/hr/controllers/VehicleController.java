@@ -50,13 +50,13 @@ public class VehicleController {
         else
             model.addAttribute("errorAlert", "visible");
         model.addAttribute("vehicleVO", new VehicleVO());
-        return "admin/vehicle_management/vehicle_list";
+        return "admin/vehicle_management/vehicleMake_list";
     }
 
-    @RequestMapping(value = "/admin/vehicle/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/vehicleMake/list", method = RequestMethod.GET)
     public String adminVehicleList(Model model) {
         model.addAttribute("vehicleMakeList", vehicleMakeService.listAllVehicleMake());
-        return "admin/vehicle_management/vehicle_list";
+        return "admin/vehicle_management/vehicleMake_list";
     }
 
     @RequestMapping(value = "/admin/vehicle/edit/{vehicleMakeId}", method = RequestMethod.GET)

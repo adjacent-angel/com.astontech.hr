@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav">
                 <%--PAGELINKS--%>
                 <li class="nav-item"><a class="nav-link" href="/admin/element/add">Elements</a></li>
-                <li class="nav-item"><a class="nav-link" href="/admin/vehicle/list">Vehicles</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/vehicleMake/list">Vehicles</a></li>
                 <li class="nav-item"><a class="nav-link" href="/admin/training">Training Modules</a></li>
             </ul>
         </div>

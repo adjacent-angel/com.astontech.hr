@@ -15,7 +15,6 @@
             $('#elementType').submit();
         });
     });
-
 </script>
 
 
