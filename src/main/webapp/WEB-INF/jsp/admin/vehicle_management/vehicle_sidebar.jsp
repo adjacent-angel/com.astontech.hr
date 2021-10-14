@@ -5,7 +5,7 @@
                 <a class="list-group-item" href="/admin/vehicleMake/list">Vehicle Make Management List</a>
             </li>
             <li>
-                <a class="list-group-item" href="/admin/vehicle/add">XXXXX</a>
+                <a class="list-group-item" href="/admin/vehicle/add">Add New Vehicle Make</a>
             </li>
         </ul>
     </div>

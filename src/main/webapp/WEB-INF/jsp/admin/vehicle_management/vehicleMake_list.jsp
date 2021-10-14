@@ -15,7 +15,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Vehicle Make</th>
-                        <th>Edit</th>
+                        <th>Model List</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -24,8 +24,8 @@
                         <tr>
                             <td>${vm.vehicleMakeId}</td>
                             <td>${vm.vehicleMakeName}</td>
-                            <td><a href="/admin/vehicle/edit/${vm.vehicleMakeId}">Edit</a></td>
-                            <td><a href="/admin/vehicle/delete/${vm.vehicleMakeId}">Delete Row</a></td>
+                            <td><a href="/admin/vehicle/edit/${vm.vehicleMakeId}"><button class="btn btn-primary">Model List</button></a></td>
+                            <td><a href="/admin/vehicle/delete/${vm.vehicleMakeId}"><button class="btn btn-danger">Delete Row</button></a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

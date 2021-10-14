@@ -14,17 +14,26 @@ public class VehicleType {
     @Version
     private Integer version;
 
-    private int vehicleYear;
+    private Integer vehicleYear;
     private String vehiclePlate;
-    private String vehicleColor;
+
 
     //region CONSTRUCTORS
 
     public VehicleType() {
     }
 
-    public VehicleType(int vehicleYear, String vehiclePlate) {
+    public VehicleType(Integer vehicleYear, String vehiclePlate) {
         this.setVehicleYear(vehicleYear);
+        this.setVehiclePlate(vehiclePlate);
+
+    }
+
+    public VehicleType(Integer vehicleYear) {
+        this.setVehicleYear(vehicleYear);
+    }
+
+    public VehicleType(String vehiclePlate) {
         this.setVehiclePlate(vehiclePlate);
     }
 
@@ -50,11 +59,11 @@ public class VehicleType {
         this.version = version;
     }
 
-    public int getVehicleYear() {
+    public Integer getVehicleYear() {
         return vehicleYear;
     }
 
-    public void setVehicleYear(int vehicleYear) {
+    public void setVehicleYear(Integer vehicleYear) {
         this.vehicleYear = vehicleYear;
     }
 
@@ -66,13 +75,6 @@ public class VehicleType {
         this.vehiclePlate = vehiclePlate;
     }
 
-    public String getVehicleColor() {
-        return vehicleColor;
-    }
-
-    public void setVehicleColor(String vehicleColor) {
-        this.vehicleColor = vehicleColor;
-    }
 
 //endregion
 
@@ -85,7 +87,6 @@ public class VehicleType {
                 ", version=" + version +
                 ", vehicleYear=" + vehicleYear +
                 ", vehiclePlate='" + vehiclePlate + '\'' +
-                ", vehicleColor='" + vehicleColor + '\'' +
                 '}';
     }
 

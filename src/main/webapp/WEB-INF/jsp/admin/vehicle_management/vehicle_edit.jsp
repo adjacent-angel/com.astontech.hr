@@ -22,6 +22,7 @@
     <%@include file="vehicle_sidebar.jsp" %>
 
     <div id="main-wrapper" class="col-sm-10">
+        <legend>Add New Model to Make</legend>
         <div class="col-sm-8">
             <c:set var="idx" value="0" scope="page" />
             <form:form class="form-horizontal" modelAttribute="vehicleMake" action="/admin/vehicle/update" method="post">
@@ -53,7 +54,9 @@
                             <div class="input-group">
                                 <form:input path="vehicleModelList[${idx}].vehicleModelName" id="${idx}" cssClass="form-control" />
                                 <span class="input-group-btn">
-                                    <button name="${idx}" class="btn btn-default remove_button" type="button">Remove</button>
+                                    <button class="btn btn-default" type="button"><a href="/admin/vehicleModel/edit/${vmo.vehicleModelId}" style="text-decoration: none;">Model Details</a></button>
+
+                                    <button name="${idx}" class="btn btn-danger remove_button" type="button">Remove</button>
                                 </span>
                             </div>
                         </div>
@@ -71,9 +74,9 @@
                 </div>
             </div>
 
-            <div class="row">
-                <button class="btn btn-primary">Update</button>
-            </div>
+                <div class="row">
+                    <button class="btn btn-primary">Update</button>
+                </div>
             </form:form>
         </div>
     </div>

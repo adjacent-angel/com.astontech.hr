@@ -85,7 +85,8 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
         testModelList.add(new VehicleModel("test model 3"));
 
         testMake.setVehicleModelList(testModelList);
-
         vehicleMakeService.saveVehicleMake(testMake);
+
+
     }
 }

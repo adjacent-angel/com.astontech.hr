@@ -16,26 +16,27 @@
         <div class="col-sm-8">
             <form:form cssClass="form-horizontal" modelAttribute="vehicleVO" action="/admin/vehicle/add" method="post">
                 <fieldset>
-                    <legend>Vehicle Management</legend>
+                    <legend>Add New Vehicle</legend>
                     <div class="form-group">
-                        <label for="inputNewVehicleTypeName" class="col-lg-2 control-label">Vehicle Type</label>
+                        <label for="inputNewVehicleMake" class="col-lg-2 control-label">Vehicle Make</label>
                         <div class="col-lg-10">
-                            <form:input path="newVehicleTypeName" type="text" cssClass="form-control" id="inputNewVehicleTypeName" placeholder="Vehicle Type Name"></form:input>
+                            <form:input path="newVehicleMake" type="text" cssClass="form-control" id="inputNewVehicleMake" placeholder="Vehicle Make Name"></form:input>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputNewVehicleMakeName" class="col-lg-2 control-label">Vehicle Make</label>
+                        <label for="inputNewVehicleModel" class="col-lg-2 control-label">Vehicle Model(s)</label>
                         <div class="col-lg-10">
-                            <form:input path="newVehicleMakeName" cssClass="form-control" id="inputNewVehicleMakeName" placeholder="Vehicle Make Name"></form:input>
+                            <form:textarea path="newVehicleModel" cssClass="form-control" rows="3" id="inputNewVehicleModel" placeholder="Vehicle Model Name(s)"></form:textarea>
+                            <span class="help-block">Enter each new Model on a new line.</span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inputNewVehicleModelName" class="col-lg-2 control-label">Vehicle Model</label>
-                        <div class="col-lg-10">
-                            <form:input path="newVehicleModelName" cssClass="form-control" id="inputNewVehicleModelName" placeholder="Vehicle Model Name"></form:input>
-                        </div>
-                    </div>
+<%--                    <div class="form-group">--%>
+<%--                        <label for="inputNewVehicleModelName" class="col-lg-2 control-label">Vehicle Model</label>--%>
+<%--                        <div class="col-lg-10">--%>
+<%--                            <form:input path="newVehiceModelName" cssClass="form-control" id="inputNewVehicleModelName" placeholder="Vehicle Model Name"></form:input>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
 
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">

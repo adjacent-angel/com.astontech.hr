@@ -19,7 +19,7 @@ public class VehicleModel {
 
     private String vehicleModelName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<VehicleType> vehicleTypeList;
 
 
